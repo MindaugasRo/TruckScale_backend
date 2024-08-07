@@ -3,6 +3,8 @@ package lt.onemagic.TruckScale.controllers;
 import lt.onemagic.TruckScale.models.Contact;
 import lt.onemagic.TruckScale.services.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,15 +29,31 @@ public class ContactController {
         return ResponseEntity.ok(contactList);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Contact> getContactById(@PathVariable long id) {
         Contact contact = contactService.getContactById(id);
         return ResponseEntity.ok(contact);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteContact(@PathVariable long id) {
-        contactService.deleteContact(id);
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteContactById(@PathVariable long id) {
+        try {
+            contactService.deleteContactById(id);
+            return ResponseEntity.noContent().build();
+        } catch (DataAccessException ex) {
+            // tvarkyti duomenų bazės klaidas
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PostMapping("/filter")
+    public ResponseEntity<List<Contact>> filterContacts(
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String city,
+            @RequestParam(required = false) String country,
+            @RequestParam(required = false) String company) {
+        List<Contact> filteredContacts = contactService.filterContacts(firstName, lastName, city, country, company);
+        return ResponseEntity.ok(filteredContacts);
     }
 }
