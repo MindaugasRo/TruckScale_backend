@@ -46,6 +46,16 @@ public class ContactController {
         }
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Contact> updateContact(@PathVariable long id, @RequestBody Contact contactDetails) {
+        Contact updatedContact = contactService.updateContact(id, contactDetails);
+        if (updatedContact != null) {
+            return ResponseEntity.ok(updatedContact);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping("/filter")
     public ResponseEntity<List<Contact>> filterContacts(
             @RequestParam(required = false) String firstName,
@@ -55,15 +65,5 @@ public class ContactController {
             @RequestParam(required = false) String company) {
         List<Contact> filteredContacts = contactService.filterContacts(firstName, lastName, city, country, company);
         return ResponseEntity.ok(filteredContacts);
-    }
-
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Contact> updateContact(@PathVariable long id, @RequestBody Contact contactDetails) {
-        Contact updatedContact = contactService.updateContact(id, contactDetails);
-        if (updatedContact != null) {
-            return ResponseEntity.ok(updatedContact);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
     }
 }
