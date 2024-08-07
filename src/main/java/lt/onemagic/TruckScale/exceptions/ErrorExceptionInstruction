@@ -1,0 +1,14 @@
+1. Kai programoje įvyksta CustomException išimtis, ji yra pagauta GlobalExceptionHandler
+klasės handleCustomException metodu.
+
+2. Šis metodas sukuria naują HttpStatusExceptionMessages instanciją su HTTP būsena
+ir pranešimu, kurie yra nustatyti CustomException objekte.
+
+3. HttpStatusExceptionMessages instancija yra grąžinama kaip atsakymas su HTTP būsena,
+kuri yra nustatyta HttpStatusExceptionMessages objekte.
+
+4. Jeigu programoje įvyksta kita išimtis, ji yra pagauta GlobalExceptionHandler klasės
+handleGlobalException metodu.
+
+5. Šis metodas sukuria naują HttpStatusExceptionMessages instanciją su HTTP būsena ir
+pranešimu, kurie yra nustatyti Exception objekte.

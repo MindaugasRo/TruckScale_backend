@@ -27,13 +27,13 @@ public class CompanyController {
         return ResponseEntity.ok(companyList);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Company> getCompanyById(@PathVariable long id) {
         Company company = companyService.getCompanyById(id);
         return ResponseEntity.ok(company);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/id/{id}")
     public ResponseEntity<Void> deleteCompany(@PathVariable long id) {
         companyService.deleteCompany(id);
         return ResponseEntity.noContent().build();

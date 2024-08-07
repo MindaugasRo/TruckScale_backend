@@ -26,13 +26,13 @@ public class CargoController {
         return ResponseEntity.ok(cargoList);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Cargo> getCargoById(@PathVariable long id) {
         Cargo cargo = cargoService.getCargoById(id);
         return ResponseEntity.ok(cargo);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteCargo(@PathVariable long id) {
         cargoService.deleteCargo(id);
         return ResponseEntity.noContent().build();

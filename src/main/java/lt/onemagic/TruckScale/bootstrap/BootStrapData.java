@@ -26,7 +26,8 @@ public class BootStrapData implements CommandLineRunner {
         logger.info("Application has started.");
 //        companyService.generateAndSaveCompanies(10);
 //        logger.info("10 Company records have been generated and saved.");
-//        contactService.generateAndSaveContacts(30);
+//        contactService.generateAndSaveContacts(120);
+//        logger.info("10 Company records have been generated and saved.");
     }
 }
 
