@@ -38,12 +38,21 @@ public class ContactService {
     }
 
     public Contact updateContact(long id, Contact contactDetails) {
-        return contactRepository.findById(id)
-                .map(existingContact -> {
-                    existingContact.updateDetails(contactDetails);
-                    return contactRepository.save(existingContact);
-                })
-                .orElse(null);
+        Contact contact = contactRepository.findById(id).orElse(null);
+        if (contact != null) {
+            contact.setFirstName(contactDetails.getFirstName());
+            contact.setSecondName(contactDetails.getSecondName());
+            contact.setEmail(contactDetails.getEmail());
+            contact.setPhone1(contactDetails.getPhone1());
+            contact.setPhone2(contactDetails.getPhone2());
+            contact.setStreet(contactDetails.getStreet());
+            contact.setCity(contactDetails.getCity());
+            contact.setPostCode(contactDetails.getPostCode());
+            contact.setCountry(contactDetails.getCountry());
+            // Update other fields as necessary
+            return contactRepository.save(contact);
+        }
+        return null;
     }
 
 //    public void generateAndSaveContacts(int count) {

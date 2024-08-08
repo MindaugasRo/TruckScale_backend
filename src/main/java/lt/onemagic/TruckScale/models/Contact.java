@@ -31,16 +31,4 @@ public class Contact {
 
     private String country;
 
-    public void updateDetails(Contact contactDetails) {
-        this.firstName = contactDetails.getFirstName();
-        this.secondName = contactDetails.getSecondName();
-        this.email = contactDetails.getEmail();
-        this.phone1 = contactDetails.getPhone1();
-        this.phone2 = contactDetails.getPhone2();
-        this.street = contactDetails.getStreet();
-        this.city = contactDetails.getCity();
-        this.postCode = contactDetails.getPostCode();
-        this.country = contactDetails.getCountry();
-        // Update other fields as necessary
-    }
 }
